@@ -7,10 +7,6 @@
           box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
   width: 100vw;
   height: 100%;
@@ -24,5 +20,57 @@ body {
   z-index: 1000;
   background: #000 url("../images/black-preloader.gif") no-repeat center center;
   background-size: 10%;
+}
+
+.container a.navbar-brand.logo {
+  color: white;
+  font-size: 27px;
+}
+
+.container a.navbar-brand.logo span {
+  color: #df0e0e;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.navbar-collapse {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+  color: white;
+}
+
+.navbar-light button.navbar-toggler {
+  color: #fff;
+  border-color: white;
+}
+
+.navbar-light span.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.left_header h1 {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.left_header .header-sec-h2 {
+  color: #0084ff;
+}
+
+.about_title span {
+  font-weight: 600;
+}
+
+@media (max-width: 548px) {
+  .row.margin_row {
+    margin-left: 0;
+  }
+  .left_header h1 {
+    font-size: 30px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

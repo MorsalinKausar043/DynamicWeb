@@ -15,10 +15,6 @@
     
 }
 
-html{
-    font-size: 62.5%;
-}
-
 body{
     width: 100vw;
     height: 100%;
@@ -50,3 +46,92 @@ body{
 // -----------------------
 // preloader style stop
 // -----------------------
+
+// -----------------------
+// navbar style start
+// -----------------------
+
+.container a.navbar-brand.logo{
+    color: white;
+    font-size: 27px;
+}
+
+.container a.navbar-brand.logo span{
+    color: rgb(223, 14, 14);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.navbar-light .navbar-nav a.nav-link{
+    color: white;
+}
+
+.navbar-light button.navbar-toggler {
+    color: #fff;
+    border-color: white;
+}
+
+.navbar-light span.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
+
+// -----------------------
+// navbar style stop
+// -----------------------
+
+// -----------------------
+// header style start
+// -----------------------
+
+.left_header {
+    h1{
+        font-size: 40px;
+        font-weight: 700;
+    }
+    
+    .header-sec-h2{
+        color: rgb(0, 132, 255);
+    }
+}
+
+// -----------------------
+// nheader style stop
+// -----------------------
+
+
+// -----------------------
+// about style start
+// -----------------------
+
+.about_title span{
+    font-weight: 600;
+}
+
+// -----------------------
+// nabout style stop
+// -----------------------
+
+
+
+
+
+// -----------------------
+// responsive for css
+// -----------------------
+
+@media (max-width : 548px) {
+    .row.margin_row{
+        margin-left: 0;
+    }
+    .left_header {
+        h1{
+            font-size: 30px;
+        }
+    }
+}
