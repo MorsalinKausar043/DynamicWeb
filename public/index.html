@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="sass/main.css">
 </head>
 <body>
-    <h2>hello world</h2>
+    <!-- preloader setup star-->
+    <div id="preloader"></div>
+    <!-- preloader setup stop-->
+
+    <!-- javascript setup -->
+    <script>
+        const preloader = document.getElementById('preloader');
+        window.addEventListener("load" , () => preloader.style.display = "none")
+    </script>
 </body>
 </html>
