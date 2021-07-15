@@ -2,9 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
-const router = require("./router")
+const router = require("./router");
 require("./db/db");
-const { urlencoded } = require('express');
 const port = process.env.PORT || 8000;
 
 // middleware path link setup
@@ -17,12 +16,17 @@ app.use("/css", express.static(path.join(__dirname, "../node_modules/bootstrap/d
 app.use("/js", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/js")));
 app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist")));
 app.use(router);
-app.use(urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(StaticPath));
 app.set("view engine", "hbs");
 app.set("views", TemplatePath);
 hbs.registerPartials(PartialsPath);
 
+// error page setup
+
+app.get('*', (req, res) => {
+    res.status(404).render("Error");
+})
 
 // express server listining
 app.listen(port , () => console.log(`express server is ${port}`))
