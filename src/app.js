@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const UserData = require("./models/conn");
 const path = require('path');
 const hbs = require('hbs');
 const router = require("./router");
@@ -16,7 +17,6 @@ app.use("/css", express.static(path.join(__dirname, "../node_modules/bootstrap/d
 app.use("/js", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/js")));
 app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist")));
 app.use(router);
-app.use(express.urlencoded({ extended: false }));
 app.use(express.static(StaticPath));
 app.set("view engine", "hbs");
 app.set("views", TemplatePath);
