@@ -39,10 +39,6 @@ body {
           justify-content: flex-end;
 }
 
-.navbar-light .navbar-nav a.nav-link {
-  color: white;
-}
-
 .navbar-light button.navbar-toggler {
   color: #fff;
   border-color: white;
