@@ -42,10 +42,12 @@ router.post("/registration", async (req, res) => {
                 email: req.body.email,
                 number: req.body.number,
                 address: req.body.address,
-                password : password ,
-                confirmpassword :Cpassword
+                password: password,
+                confirmpassword: Cpassword
                 
-            })
+            });
+            await usedpostdata.save();
+            res.status(201).render("index");
 
         } else
         {
