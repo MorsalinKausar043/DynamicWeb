@@ -43,7 +43,7 @@ router.post("/registration", async (req, res) => {
                 number: req.body.number,
                 address: req.body.address,
                 password: password,
-                confirmpassword: Cpassword
+                Cpassword: Cpassword
                 
             });
             await usedpostdata.save();
