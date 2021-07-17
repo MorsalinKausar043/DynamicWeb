@@ -3,6 +3,7 @@ const router = new express.Router();
 const UserData = require("./models/conn");
 
 // middleware
+router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', (req, res) => {
@@ -30,9 +31,26 @@ router.get('/registration', (req, res) => {
 router.post("/registration", async (req, res) => {
     try
     {
-        const userdatas = new UserData(req.body);
-        await userdatas.save();
-        res.status(201).render("index");
+        const password = req.body.password;
+        const Cpassword = req.body.Cpassword;
+
+        if (password === Cpassword)
+        {
+            const usedpostdata = new UserData({
+                fname: req.body.fname,
+                lname: req.body.lname,
+                email: req.body.email,
+                number: req.body.number,
+                address: req.body.address,
+                password : password ,
+                confirmpassword :Cpassword
+                
+            })
+
+        } else
+        {
+            res.status(404).render('Error', { para: "password not match" });
+        }
         
     } catch (error) {
         console.log(error);

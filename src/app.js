@@ -16,6 +16,7 @@ const PartialsPath = path.join(__dirname, "../templates/partials");
 app.use("/css", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/css")));
 app.use("/js", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/js")));
 app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist")));
+app.use(express.json());
 app.use(router);
 app.use(express.static(StaticPath));
 app.set("view engine", "hbs");
