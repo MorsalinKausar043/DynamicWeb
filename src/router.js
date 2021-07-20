@@ -51,13 +51,27 @@ router.post("/registration", async (req, res) => {
 
         } else
         {
-            res.status(404).render('Error', { para: "password not match" });
+            res.status(404).render('Error', { para: "Invalid Password" });
         }
         
     } catch (error) {
         console.log(error);
         res.status(404).render('Error', { para: error });
     }
+})
+
+// login page post and setup
+
+router.post("/login", async (req, res) => {
+   try {
+       const email = req.body.email;
+       const password = req.body.password;
+       const userEmail = await UserData.findOne({ email: email });
+       userEmail.password === password ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
+   } catch (error) {
+       console.log(error)
+       res.status(501).render('Error' , { para: "Invalid Password" })
+   }
 })
 
 // get register api
