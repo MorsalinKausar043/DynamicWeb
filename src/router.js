@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const UserData = require("./models/conn");
+const bcrypt = require("bcryptjs");
 
 // middleware
 router.use(express.json());
@@ -67,12 +68,43 @@ router.post("/login", async (req, res) => {
        const email = req.body.email;
        const password = req.body.password;
        const userEmail = await UserData.findOne({ email: email });
-       userEmail.password === password ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
+    //    console.log(`this user password is ${userEmail.password}`);
+       const isMatch = await bcrypt.compare(password, userEmail.password);
+       isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
    } catch (error) {
-       console.log(error)
+       console.log(error);
        res.status(501).render('Error' , { para: "Invalid Password" })
    }
 })
+
+// router.post("/login", async (req, res) => {
+//     try
+//     {
+//         const email = req.body.email;
+//         const password = req.body.password;
+
+//         const userEmail = await UserData.findOne({ email: email });
+//         const isMatch = await bcrypt.compare(password, userEmail.password);
+
+// old
+//         userEmail.password === password ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
+
+    //   new  
+//         isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
+
+//         // if (isMatch)
+//         // {
+//         //     res.status(201).render("index");
+//         // } else
+//         // {
+//         //     res.status(501).render('Error', { para: "Invalid Password" });
+//         // }
+        
+//     } catch (error) {
+//         console.log(error);
+//         res.status(501).render('Error' , { para: "Invalid Password" })
+//     }
+// })
 
 // get register api
 
