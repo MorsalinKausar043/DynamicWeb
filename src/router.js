@@ -77,35 +77,6 @@ router.post("/login", async (req, res) => {
    }
 })
 
-// router.post("/login", async (req, res) => {
-//     try
-//     {
-//         const email = req.body.email;
-//         const password = req.body.password;
-
-//         const userEmail = await UserData.findOne({ email: email });
-//         const isMatch = await bcrypt.compare(password, userEmail.password);
-
-// old
-//         userEmail.password === password ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
-
-    //   new  
-//         isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
-
-//         // if (isMatch)
-//         // {
-//         //     res.status(201).render("index");
-//         // } else
-//         // {
-//         //     res.status(501).render('Error', { para: "Invalid Password" });
-//         // }
-        
-//     } catch (error) {
-//         console.log(error);
-//         res.status(501).render('Error' , { para: "Invalid Password" })
-//     }
-// })
-
 // get register api
 
 router.get("/register-api", async (req, res) => {
