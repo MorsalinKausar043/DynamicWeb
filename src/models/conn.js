@@ -3,6 +3,8 @@ const validator = require('validator');
 const bcript = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// mongoose schema
+
 const UserSchema = new mongoose.Schema({
     fname: {
         type: String,
@@ -66,6 +68,8 @@ const UserSchema = new mongoose.Schema({
     
 });
 
+// middleware
+
 UserSchema.methods.ganerateAuthtoken = async function () {
     try
     {
@@ -87,6 +91,8 @@ UserSchema.pre("save", async function(next) {
     }
     next();
 });
+
+// mongoose models
 
 const UserData = new mongoose.model("UserData", UserSchema);
 
