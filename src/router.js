@@ -49,7 +49,7 @@ router.post("/registration", async (req, res) => {
             });
 
             const token = await usedpostdata.ganerateAuthtoken();
-            // console.log(token);
+            console.log(token);
 
             await usedpostdata.save();
             res.status(201).render("index");
@@ -74,6 +74,9 @@ router.post("/login", async (req, res) => {
        const userEmail = await UserData.findOne({ email: email });
     //    console.log(`this user password is ${userEmail.password}`);
        const isMatch = await bcrypt.compare(password, userEmail.password);
+       const token = await userEmail.ganerateAuthtoken();
+       console.log(token);
+
        isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
    } catch (error) {
        console.log(error);
