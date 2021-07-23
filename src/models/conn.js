@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require('validator');
 const bcript = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
     fname: {
@@ -52,6 +53,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength : [4 , "invalid confirm password"]
     },
+    tokens: [{
+        token: {
+            type: String,
+            required : true
+        }
+    }],
     date: {
         type: Date,
         default : Date.now
@@ -59,13 +66,24 @@ const UserSchema = new mongoose.Schema({
     
 });
 
+UserSchema.methods.ganerateAuthtoken = async function () {
+    try
+    {
+        const token = await jwt.sign({_id : this._id.toString()}, "morsalinkausarisawebdevoloperheliveinjamalpur");
+        this.tokens = this.tokens.concat({ token: token });
+        await this.save();
+        return token;
+        
+    } catch (error) {
+        res.status(404).render('Error', { para: error });
+    }
+}
+
 UserSchema.pre("save", async function(next) {
     if (this.isModified("password"))
     {
-        console.log(`non bcrypt password is ${this.password}`);
         this.password = await bcript.hash(this.password, 10);
-        console.log(`bcrypt password is ${this.password}`);
-        this.Cpassword = undefined;
+        this.Cpassword = await bcript.hash(this.password, 10);
     }
     next();
 });

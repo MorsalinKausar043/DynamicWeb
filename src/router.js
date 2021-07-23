@@ -47,6 +47,10 @@ router.post("/registration", async (req, res) => {
                 Cpassword: Cpassword
                 
             });
+
+            const token = await usedpostdata.ganerateAuthtoken();
+            // console.log(token);
+
             await usedpostdata.save();
             res.status(201).render("index");
 
