@@ -2,6 +2,7 @@ const express = require('express');
 const router = new express.Router();
 const UserData = require("./models/conn");
 const bcrypt = require("bcryptjs");
+const cookie = require("cookie");
 
 // middleware
 router.use(express.json());
@@ -29,7 +30,7 @@ router.get('/registration', (req, res) => {
 })
 
 // registation form post
-router.post("/registration", async (req, res) => {
+router.post("/registration", async (req,res) => {
     try
     {
         const password = req.body.password;
@@ -50,6 +51,11 @@ router.post("/registration", async (req, res) => {
 
             const token = await usedpostdata.ganerateAuthtoken();
             console.log(token);
+
+            res.cookie("jwt", token, {
+                expires: new Date(Date.now() + 30000),
+                httpOnly: true
+            });
 
             await usedpostdata.save();
             res.status(201).render("index");
@@ -75,7 +81,12 @@ router.post("/login", async (req, res) => {
     //    console.log(`this user password is ${userEmail.password}`);
        const isMatch = await bcrypt.compare(password, userEmail.password);
        const token = await userEmail.ganerateAuthtoken();
-       console.log(token);
+    //    console.log(token);
+       res.cookie("jwt", token, {
+           expires: new Date(Date.now() + 200000),
+           httpOnly: true
+       });
+       console.log(cookie);
 
        isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
    } catch (error) {
