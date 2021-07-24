@@ -1,4 +1,4 @@
-require(".env").config();
+require("dotenv").config();
 const express = require('express');
 const app = express();
 const UserData = require("./models/conn");
