@@ -2,10 +2,12 @@ const express = require('express');
 const router = new express.Router();
 const UserData = require("./models/conn");
 const bcrypt = require("bcryptjs");
-const cookie = require("cookie");
+const cookieParser = require("cookie-parser");
+const auth = require('./middleware/auth');
 
 // middleware
 router.use(express.json());
+router.use(cookieParser());
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', (req, res) => {
@@ -16,7 +18,8 @@ router.get('/about', (req, res) => {
     res.status(201).render("about");
 })
 
-router.get('/services', (req, res) => {
+router.get('/services', auth , (req, res) => {
+    // console.log(`this awesome token is : ${req.cookies.jwt}`);
     res.status(201).render("services");
 })
 
@@ -84,9 +87,9 @@ router.post("/login", async (req, res) => {
     //    console.log(token);
        res.cookie("jwt", token, {
            expires: new Date(Date.now() + 200000),
-           httpOnly: true
+           httpOnly: true,
+        //    secure : true  //https er moddhe used korte hobe!
        });
-       console.log(cookie);
 
        isMatch ? res.status(201).render("index") : res.status(501).render('Error', { para: "Invalid Password" });
    } catch (error) {

@@ -7,6 +7,7 @@ const hbs = require('hbs');
 const router = require("./router");
 require("./db/db");
 const port = process.env.PORT || 8000;
+const cookieParser = require("cookie-parser");
 
 // middleware path link setup
 const StaticPath = path.join(__dirname, "../public");
@@ -18,6 +19,7 @@ app.use("/css", express.static(path.join(__dirname, "../node_modules/bootstrap/d
 app.use("/js", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/js")));
 app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist")));
 app.use(express.json());
+app.use(cookieParser());
 app.use(router);
 app.use(express.static(StaticPath));
 app.set("view engine", "hbs");
