@@ -10,6 +10,9 @@ const auth = async (req, res, next) => {
         const userMatch = await UserData.findOne({ _id: UserDataAuth._id });
         // console.log(userMatch.fname);
 
+        req.token = token;
+        req.userMatch = userMatch;
+
         next();
         
     } catch (error) {

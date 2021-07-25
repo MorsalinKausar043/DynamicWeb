@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     res.status(201).render("index");
 })
 
-router.get('/about', (req, res) => {
+router.get('/about', auth , (req, res) => {
     res.status(201).render("about");
 })
 
@@ -31,6 +31,22 @@ router.get('/login', (req, res) => {
 router.get('/registration', (req, res) => {
     res.status(201).render("registration");
 })
+
+router.get("/logout", auth , async (req, res) => {
+    try
+    {
+        req.userMatch.tokens = req.userMatch.tokens.filter((val) => {
+            return val.token !== req.token;
+        })
+        res.clearCookie("jwt");
+        await req.userMatch.save();
+        res.status(201).render("logout");
+
+    } catch (error) {
+        res.status(501).render('Error', { para: error });
+    }
+})
+
 
 // registation form post
 router.post("/registration", async (req,res) => {
@@ -97,6 +113,7 @@ router.post("/login", async (req, res) => {
        res.status(501).render('Error' , { para: "Invalid Password" })
    }
 })
+
 
 // get register api
 
