@@ -38,6 +38,10 @@ router.get("/logout", auth , async (req, res) => {
         req.userMatch.tokens = req.userMatch.tokens.filter((val) => {
             return val.token !== req.token;
         })
+
+        // // all devices has clean tokens
+        // req.userMatch.tokens = [];
+
         res.clearCookie("jwt");
         await req.userMatch.save();
         res.status(201).render("logout");
@@ -72,7 +76,7 @@ router.post("/registration", async (req,res) => {
             console.log(token);
 
             res.cookie("jwt", token, {
-                expires: new Date(Date.now() + 30000),
+                expires: new Date(Date.now() + 300000),
                 httpOnly: true
             });
 
@@ -102,7 +106,7 @@ router.post("/login", async (req, res) => {
        const token = await userEmail.ganerateAuthtoken();
     //    console.log(token);
        res.cookie("jwt", token, {
-           expires: new Date(Date.now() + 200000),
+           expires: new Date(Date.now() + 2000000),
            httpOnly: true,
         //    secure : true  //https er moddhe used korte hobe!
        });
